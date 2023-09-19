@@ -1,4 +1,3 @@
-import React from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
@@ -8,7 +7,7 @@ const SerpentineParticles = () => {
   };
 
   return (
-    <div className='App'>
+    <>
       <Particles
         id='tsparticles'
         init={particlesInit}
@@ -124,7 +123,7 @@ const SerpentineParticles = () => {
           },
         }}
       />
-    </div>
+    </>
   );
 };
 

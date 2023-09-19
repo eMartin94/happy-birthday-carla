@@ -1,11 +1,11 @@
 import CountdownTimer from './components/CountdownTimer';
-import Countdown from './components/Hb';
 
 function App() {
   return (
-    <>
+    <div className='bg-gradient-hb scroll-smooth flex flex-col '>
+      <h1 className='opacity-0 absolute'>Happy Birthday</h1>
       <CountdownTimer />
-    </>
+    </div>
   );
 }
 

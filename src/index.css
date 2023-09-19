@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff5f62, #c9ffbf);
+  -webkit-border-radius: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #fff;
+}

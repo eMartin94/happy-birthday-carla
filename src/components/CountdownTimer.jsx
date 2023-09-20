@@ -26,7 +26,7 @@ const CountdownTimer = () => {
   useEffect(() => {
     const calculateCountdown = () => {
       const currentDate = new Date();
-      const birthday = '-09-25T00:00:00';
+      const birthday = '-09-19T00:00:00';
       const targetDate = new Date(`${currentDate.getFullYear()}${birthday}`);
       const oneDay = 1000 * 60 * 60 * 24;
       const timeRemaining = targetDate - currentDate;

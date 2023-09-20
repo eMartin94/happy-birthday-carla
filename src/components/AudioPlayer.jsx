@@ -130,7 +130,7 @@ const AudioPlayer = () => {
         <img
           src={songs[currentSongIndex].cover}
           alt='Portada del álbum'
-          className='w-72 h-72 object-cover rounded absolute top-[20%] sm:-top-14 shadow-custom transition-all duration-300 ease-linear'
+          className='w-72 h-72 object-cover rounded absolute top-[15%] sm:-top-14 shadow-custom transition-all duration-300 ease-linear'
         />
         <div className='sm:hidden'></div>
         <div className='w-full flex flex-col mt-[45%] sm:mt-0 mb-2'>

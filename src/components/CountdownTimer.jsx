@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import HappyBirthday from './HappyBirthday';
-import { FaArrowCircleDown, FaHeart } from 'react-icons/fa';
+import { FaArrowCircleDown } from 'react-icons/fa';
 import AudioPlayer from './AudioPlayer';
+import Footer from './Footer';
 
 const CountdownTimer = () => {
   const [countdown, setCountdown] = useState({
@@ -11,7 +12,6 @@ const CountdownTimer = () => {
     seconds: 0,
   });
   const [showBirthdayMessage, setShowBirthdayMessage] = useState(false);
-  const year = new Date().getFullYear();
 
   const scrollToMp3Section = () => {
     const mp3Section = document.getElementById('mp3');
@@ -26,7 +26,7 @@ const CountdownTimer = () => {
   useEffect(() => {
     const calculateCountdown = () => {
       const currentDate = new Date();
-      const birthday = '-09-19T00:00:00';
+      const birthday = '-09-25T00:00:00';
       const targetDate = new Date(`${currentDate.getFullYear()}${birthday}`);
       const oneDay = 1000 * 60 * 60 * 24;
       const timeRemaining = targetDate - currentDate;
@@ -93,9 +93,9 @@ const CountdownTimer = () => {
         <section className='relative w-full min-h-screen'>
           <div className='bg-serpentine w-full min-h-screen relative bg-no-repeat bg-contain bg-center bg-origin-content'>
             <HappyBirthday />
-            <div className='absolute bottom-4 w-full flex justify-center items-center'>
+            <div className='absolute bottom-[15%] sm:bottom-4 w-full flex justify-center items-center'>
               <FaArrowCircleDown
-                className='text-white text-5xl animate-bounce hover:animate-none  cursor-pointer transition-all duration-300 ease-linear drop-shadow-md'
+                className='text-yellow-300 sm:text-white text-5xl animate-bounce hover:animate-none  cursor-pointer transition-all duration-300 ease-linear drop-shadow-md'
                 onClick={scrollToMp3Section}
               />
             </div>
@@ -105,23 +105,10 @@ const CountdownTimer = () => {
               <AudioPlayer />
             </div>
           </div>
-          <footer className='w-full flex flex-col justify-center items-center gap-4 py-4 absolute bottom-0 z-50'>
-            <p className='font-Unbounded flex gap-2 text-sm'>
-              Made with <FaHeart className='text-red-500' /> by{' '}
-              <a
-                href='https://github.com/emartin94'
-                target='_blank'
-                rel='noreferrer'
-                className='font-bold transition-all duration-300 ease-linear'
-              >
-                eMartin
-              </a>
-            </p>
-            <p className='font-Unbounded text-sm'>© {year}</p>
-          </footer>
+          <Footer />
         </section>
       ) : (
-        <section className='w-full h-screen flex flex-col justify-center gap-8 items-center'>
+        <section className='w-full h-screen flex flex-col justify-center gap-8 items-center relative'>
           <p className='text-lg md:text-2xl lg:text-4xl font-Sniglet text-tertiary'>
             Quedan:
           </p>
@@ -159,6 +146,7 @@ const CountdownTimer = () => {
               </div>
             </div>
           </div>
+          <Footer />
         </section>
       )}
     </div>

@@ -9,10 +9,11 @@ export default {
         tertiary: '#26394d',
       },
       fontFamily: {
-        Sniglet: ['Sniglet', 'cursive'],
+        sniglet: ['Sniglet', 'cursive'],
         'open-sans': ['Open Sans', 'sans-serif'],
         'roboto-condensed': ['Roboto Condensed', 'sans-serif'],
-        Unbounded: ['Unbounded', 'cursive'],
+        unbounded: ['Unbounded', 'cursive'],
+        'dancing-script': ['Indie Flower', 'cursive'],
       },
       backgroundImage: {
         'gradient-hb': 'linear-gradient(to bottom, #ffafbd, #c9ffbf)',

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,4 +18,211 @@
 
 ::-webkit-scrollbar-corner {
   background: #fff;
+}
+
+:root {
+  --text-color: #646b8c;
+  --headline-color: #2b3044;
+  --mail: #bce1e0;
+  --mail-triangle: #a8dbdb;
+  --mail-background: #a8dbdb;
+  --mail-shadow: #6d8e8e;
+  --paper: #fffef4;
+  --paper-border: #f9f8ea;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mail__letter {
+  width: 104px;
+  height: 72px;
+  position: relative;
+  animation: letter 2s ease infinite;
+}
+.mail__letter:before,
+.mail__letter:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 48px;
+  z-index: 1;
+}
+.mail__letter:before {
+  background: var(--mail);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+.mail__letter:after {
+  background: var(--mail-triangle);
+  clip-path: polygon(0 100%, 50% 55%, 100% 100%);
+}
+.mail__letter .mail__background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--mail-background);
+  clip-path: polygon(0 24px, 50% 0, 100% 24px, 100% 100%, 0 100%);
+}
+.mail__letter .mail__shadow {
+  background: black;
+  width: 112px;
+  height: 4px;
+  border-radius: 50%;
+  position: absolute;
+  top: 108%;
+  left: -4px;
+  background: var(--mail-shadow);
+  animation: shadow 2s ease infinite;
+}
+.mail__letter .mail__body {
+  width: 360px;
+  height: 420px;
+  bottom: -20px;
+  left: -128px;
+  border-radius: 1px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--paper-border);
+  position: absolute;
+  transform: translateY(36%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+}
+.mail__letter .mail__body .mail__text {
+  width: 360px;
+  height: 420px;
+  position: relative;
+  transition: opacity 0.3s ease 0.8s;
+}
+.mail__letter .mail__body .mail__text .mail__headline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -32px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transform: translateZ(0);
+}
+
+.mail__letter .mail__body .mail__text .mail__headline .mail__close {
+  cursor: pointer;
+}
+.mail__letter .mail__body .mail__text .mail__headline .mail__close svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: #fff;
+  padding: 4px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+}
+
+#mail:not(.mail--show) .mail__letter .mail__body .mail__text {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+#mail.mail--show .mail__letter {
+  animation-play-state: paused;
+}
+#mail.mail--show .mail__letter .mail__body {
+  animation: paper 0.8s linear forwards;
+}
+#mail.mail--show .mail__letter .shadow {
+  animation-play-state: paused;
+}
+#mail.mail--hide .mail__letter .mail__body {
+  animation: paper-back 0.8s linear forwards;
+}
+
+@keyframes paper {
+  30% {
+    z-index: 0;
+    transform: translateY(28%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+  }
+  60%,
+  100% {
+    z-index: 2;
+  }
+  60% {
+    transform: translateY(0) translateZ(0) scale(0.2, 0.16) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-53%) translateZ(0);
+  }
+}
+
+@keyframes paper-back {
+  0% {
+    transform: translateY(-53%) translateZ(0);
+  }
+  30% {
+    transform: translateY(0) translateZ(0) scale(0.2, 0.16) rotate(0deg);
+  }
+  60% {
+    z-index: 0;
+    transform: translateY(18%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+  }
+  0%,
+  30% {
+    z-index: 2;
+  }
+  100% {
+    transform: translateY(36%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+  }
+}
+
+@keyframes letter {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shadow {
+  50% {
+    opacity: 0.7;
+    transform: translateY(4px) scale(0.8);
+  }
+}
+
+@media (max-width: 640px) {
+  @keyframes paper {
+    30% {
+      z-index: 0;
+      transform: translateY(28%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+    }
+    60%,
+    100% {
+      z-index: 2;
+    }
+    60% {
+      transform: translateY(0) translateZ(0) scale(0.2, 0.16) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-28%) translateZ(0);
+    }
+  }
+
+  @keyframes paper-back {
+    0% {
+      transform: translateY(-28%) translateZ(0);
+    }
+    30% {
+      transform: translateY(0) translateZ(0) scale(0.2, 0.16) rotate(0deg);
+    }
+    60% {
+      z-index: 0;
+      transform: translateY(18%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+    }
+    0%,
+    30% {
+      z-index: 2;
+    }
+    100% {
+      transform: translateY(36%) translateZ(0) scale(0.2, 0.16) rotate(90deg);
+    }
+  }
 }

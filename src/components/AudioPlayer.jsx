@@ -121,7 +121,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div className='w-full sm:w-[420px] h-screen sm:h-[500px] px-8 py-4 bg-white/50 backdrop-blur-sm rounded-lg shadow-lg z-50 transition-all duration-300 ease-linear'>
+    <div className='w-full sm:w-[420px] h-screen sm:h-[500px] px-8 py-4 bg-white/50 backdrop-blur-sm rounded-lg shadow-lg z-40 transition-all duration-300 ease-linear'>
       <div
         ref={elementRef}
         style={{ transform: 'scale(0.75)' }}
@@ -132,12 +132,14 @@ const AudioPlayer = () => {
           alt='Portada del álbum'
           className='w-72 h-72 object-cover rounded absolute top-[15%] sm:-top-14 shadow-custom transition-all duration-300 ease-linear'
         />
+
         <div className='sm:hidden'></div>
+        {/* <AnimationMail /> */}
         <div className='w-full flex flex-col mt-[45%] sm:mt-0 mb-2'>
-          <h2 className='text-lg font-semibold mt-4 mb-2 font-Unbounded'>
+          <h2 className='text-lg font-semibold mt-4 mb-2 font-unbounded'>
             {songs[currentSongIndex].title}
           </h2>
-          <p className='text-sm text-gray-500 font-Unbounded mb-4'>
+          <p className='text-sm text-gray-500 font-unbounded mb-4'>
             {songs[currentSongIndex].artist}
           </p>
           <audio

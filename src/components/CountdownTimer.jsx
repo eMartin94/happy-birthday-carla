@@ -14,6 +14,7 @@ const CountdownTimer = () => {
   });
   const [showBirthdayMessage, setShowBirthdayMessage] = useState(false);
   const [showDown, setShowDown] = useState(false);
+  const oneSecond = 1000;
 
   const scrollToMp3Section = () => {
     const mp3Section = document.getElementById('mp3');
@@ -24,6 +25,7 @@ const CountdownTimer = () => {
       });
     }
   };
+
   const handleShowDown = () => {
     setTimeout(() => {
       setShowDown(!showDown);
@@ -35,58 +37,41 @@ const CountdownTimer = () => {
       const currentDate = new Date();
       const birthday = '-09-25T00:00:00';
       const targetDate = new Date(`${currentDate.getFullYear()}${birthday}`);
-      const oneDay = 1000 * 60 * 60 * 24;
+
       const timeRemaining = targetDate - currentDate;
-      const days = Math.floor(timeRemaining / oneDay);
-      const hours = Math.floor((timeRemaining % oneDay) / (1000 * 60 * 60));
-      const minutes = Math.floor(
-        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-      const isCurrentDayBirthday =
-        targetDate.getDate() === currentDate.getDate() &&
-        targetDate.getMonth() === currentDate.getMonth();
-
-      const isBeforeDayBirthday =
-        targetDate.getDate() >= currentDate.getDate() &&
-        targetDate.getMonth() >= currentDate.getMonth();
-
-      const isAfterDayBirthday =
-        targetDate.getDate() <= currentDate.getDate() &&
-        targetDate.getMonth() <= currentDate.getMonth();
-
-      if (isCurrentDayBirthday) {
-        setShowBirthdayMessage(true);
-      } else if (isBeforeDayBirthday) {
-        setShowBirthdayMessage(false);
-        setCountdown({ days, hours, minutes, seconds });
-      } else if (isAfterDayBirthday) {
-        setShowBirthdayMessage(false);
+      if (timeRemaining < 0) {
         const nextYearTargetDate = new Date(
           `${currentDate.getFullYear() + 1}${birthday}`
         );
         const nextYearTimeRemaining = nextYearTargetDate - currentDate;
-        const nextYearDays = Math.floor(nextYearTimeRemaining / oneDay);
-        const nextYearHours = Math.floor(
-          (nextYearTimeRemaining % oneDay) / (1000 * 60 * 60)
-        );
-        const nextYearMinutes = Math.floor(
-          (nextYearTimeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const nextYearSeconds = Math.floor(
-          (nextYearTimeRemaining % (1000 * 60)) / 1000
-        );
-        setCountdown({
-          days: nextYearDays,
-          hours: nextYearHours,
-          minutes: nextYearMinutes,
-          seconds: nextYearSeconds,
-        });
+        setCountdown(calculateTimeUnits(nextYearTimeRemaining));
       } else {
-        setShowBirthdayMessage(false);
-        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setCountdown(calculateTimeUnits(timeRemaining));
       }
+
+      const isCurrentDayBirthday =
+        targetDate.getDate() === currentDate.getDate() &&
+        targetDate.getMonth() === currentDate.getMonth();
+      setShowBirthdayMessage(isCurrentDayBirthday);
+    };
+
+    const calculateTimeUnits = (timeRemaining) => {
+      const oneDay = 1000 * 60 * 60 * 24;
+      const oneHour = 1000 * 60 * 60;
+      const oneMinute = 1000 * 60;
+
+      const days = Math.floor(timeRemaining / oneDay);
+      const hours = Math.floor((timeRemaining % oneDay) / oneHour);
+      const minutes = Math.floor((timeRemaining % oneHour) / oneMinute);
+      const seconds = Math.floor((timeRemaining % oneMinute) / oneSecond);
+
+      return {
+        days,
+        hours,
+        minutes,
+        seconds,
+      };
     };
 
     const countdownInterval = setInterval(calculateCountdown, 1000);
